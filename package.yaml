@@ -1,0 +1,60 @@
+# This YAML file describes your package. Stack will automatically generate a
+# Cabal file when you run `stack build`. See the hpack website for help with
+# this file: <https://github.com/sol/hpack>.
+name: haskell99
+version: '0.0.0'
+github: "dsillman2000/haskell99"
+license: MIT
+author: "David Sillman"
+maintainer: "David Sillman"
+# synopsis: A new Haskeleton package.
+# description: haskell99 is a new Haskeleton package.
+# category: Other
+
+dependencies:
+- base
+- tasty
+- tasty-hunit
+- tasty-quickcheck
+
+extra-source-files:
+- CHANGELOG.md
+- LICENSE.md
+- package.yaml
+- README.md
+- stack.yaml
+
+ghc-options:
+- -Wall
+- -Wcompat
+- -Widentities
+- -Wincomplete-record-updates
+- -Wincomplete-uni-patterns
+- -Wmissing-export-lists
+- -Wmissing-home-modules
+- -Wpartial-fields
+- -Wredundant-constraints
+
+library:
+  dependencies:
+  - base
+  - haskell99
+  source-dirs: 
+  - library
+
+tests:
+  haskell99-test-suite:
+    source-dirs: test-suite
+    other-modules:
+    - Utils
+    - TestHaskell10
+    - TestHaskell20
+    main: Main.hs
+    dependencies:
+    - base
+    - haskell99
+
+    ghc-options:
+    - -rtsopts
+    - -threaded
+    - -with-rtsopts=-N

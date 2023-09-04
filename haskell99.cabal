@@ -1,0 +1,76 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.35.2.
+--
+-- see: https://github.com/sol/hpack
+
+name:           haskell99
+version:        0.0.0
+homepage:       https://github.com/dsillman2000/haskell99#readme
+bug-reports:    https://github.com/dsillman2000/haskell99/issues
+author:         David Sillman
+maintainer:     David Sillman
+license:        MIT
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    CHANGELOG.md
+    LICENSE.md
+    package.yaml
+    README.md
+    stack.yaml
+
+source-repository head
+  type: git
+  location: https://github.com/dsillman2000/haskell99
+
+library
+  exposed-modules:
+      Haskell1
+      Haskell10
+      Haskell11
+      Haskell12
+      Haskell13
+      Haskell14
+      Haskell15
+      Haskell16
+      Haskell17
+      Haskell18
+      Haskell2
+      Haskell3
+      Haskell4
+      Haskell5
+      Haskell6
+      Haskell7
+      Haskell8
+      Haskell9
+  other-modules:
+      Paths_haskell99
+  hs-source-dirs:
+      library
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
+  build-depends:
+      base
+    , haskell99
+    , tasty
+    , tasty-hunit
+    , tasty-quickcheck
+  default-language: Haskell2010
+
+test-suite haskell99-test-suite
+  type: exitcode-stdio-1.0
+  main-is: Main.hs
+  other-modules:
+      Utils
+      TestHaskell10
+      TestHaskell20
+  hs-source-dirs:
+      test-suite
+  ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints -rtsopts -threaded -with-rtsopts=-N
+  build-depends:
+      base
+    , haskell99
+    , tasty
+    , tasty-hunit
+    , tasty-quickcheck
+  default-language: Haskell2010
