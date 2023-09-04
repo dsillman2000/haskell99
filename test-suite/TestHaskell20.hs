@@ -9,6 +9,8 @@ import Haskell15 (repli)
 import Haskell16 (dropEvery)
 import Haskell17 (split)
 import Haskell18 (slice)
+import Haskell19 (rotate)
+import Haskell20 (removeAt)
 import Test.Tasty.HUnit
 import Test.Tasty.QuickCheck
 
@@ -16,7 +18,8 @@ tests20 :: TestTree
 tests20 = testGroup "Unit Tests for Haskell 11-20" 
     [ haskell11Tests, haskell12Tests, haskell13Tests,
       haskell14Tests, haskell15Tests, haskell16Tests,
-      haskell17Tests, haskell18Tests ]
+      haskell17Tests, haskell18Tests, haskell19Tests,
+      haskell20Tests ]
 
 -- Tests for Haskell 11
 
@@ -185,10 +188,7 @@ haskell17_simpleSplits = do
 
 splittingEmptyList :: Property
 splittingEmptyList = forAll arbitrary 
-    (\n -> 
-        ((n :: Int) < 1) || 
-        (split ([] :: [Integer]) n == ([], []))
-    )
+    (\n ->  split ([] :: [Integer]) n == ([], []))
 
 -- Tests for Haskell 18
 
@@ -209,4 +209,41 @@ sliceLengthUpperBound = forAll arbitrary
     (\li lo hi -> 
         (lo > hi) ||
         length (slice (li :: [Char]) (lo :: Int) (hi :: Int)) <= (hi - lo)
+    )
+
+-- Tests for Haskell 19
+
+haskell19Tests :: TestTree
+haskell19Tests = testGroup "Haskell 19 Tests" [
+    testCase "Simple string rotation" haskell19_simpleStringRotation,
+    testProperty "rotate does not vary length" rotateLengthInvariant ]
+
+haskell19_simpleStringRotation :: IO ()
+haskell19_simpleStringRotation = do
+    assertEqual "empty string rotation" (rotate "" 3) ""
+    assertEqual "unary string rotation" (rotate "n" 4) "n"
+    assertEqual "simple string rotation" (rotate "davidsillman" 5) "sillmandavid"
+    assertEqual "simple negative string rotation" (rotate "davidsillman" (-7)) "sillmandavid"
+
+rotateLengthInvariant :: Property
+rotateLengthInvariant = forAll arbitrary
+    (\l n -> length (l :: [Char]) == length (rotate l (n :: Int)))
+
+-- Tests for Haskell 20
+
+haskell20Tests :: TestTree
+haskell20Tests = testGroup "Haskell 20 Tests" [
+    testCase "Simple string Char extraction" haskell20_stringCharExtraction,
+    testProperty "valid removeAt calls decrement length" validRemovalDecrementsLength ]
+
+haskell20_stringCharExtraction :: IO ()
+haskell20_stringCharExtraction = do
+    assertEqual "extract only character" (removeAt "a" 1) ('a', "")
+    assertEqual "extract middle character" (removeAt "abc" 2) ('b', "ac")
+
+validRemovalDecrementsLength :: Property
+validRemovalDecrementsLength = forAll arbitrary
+    (\l n ->
+        ((n :: Int) < 1 || length (l :: [Integer]) < n) ||
+        ((length . snd) (removeAt l n) == pred (length l))
     )
