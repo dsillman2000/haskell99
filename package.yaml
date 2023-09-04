@@ -18,8 +18,7 @@ dependencies:
 - tasty-quickcheck
 
 extra-source-files:
-- CHANGELOG.md
-- LICENSE.md
+- LICENSE
 - package.yaml
 - README.md
 - stack.yaml
@@ -38,7 +37,6 @@ ghc-options:
 library:
   dependencies:
   - base
-  - haskell99
   source-dirs: 
   - library
 

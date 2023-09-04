@@ -14,8 +14,7 @@ license:        MIT
 license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
-    CHANGELOG.md
-    LICENSE.md
+    LICENSE
     package.yaml
     README.md
     stack.yaml
@@ -51,7 +50,6 @@ library
   ghc-options: -Wall -Wcompat -Widentities -Wincomplete-record-updates -Wincomplete-uni-patterns -Wmissing-export-lists -Wmissing-home-modules -Wpartial-fields -Wredundant-constraints
   build-depends:
       base
-    , haskell99
     , tasty
     , tasty-hunit
     , tasty-quickcheck
